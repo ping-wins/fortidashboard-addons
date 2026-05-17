@@ -18,8 +18,8 @@
       "category": "waf",
       "icon": "fortinet",
       "description": "Connect a FortiWeb WAF: REST health probe plus push-ingest of Attack/Traffic/Event telemetry.",
-      "latestVersion": "8.0.5",
-      "versions": ["8.0.5"],
+      "latestVersion": "8.0.5.1",
+      "versions": ["8.0.5.1", "8.0.5"],
       "tagTemplate": "fortiweb-core-v{version}"
     },
     {
