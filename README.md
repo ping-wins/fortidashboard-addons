@@ -1,66 +1,24 @@
-# fortidashboard-addons
+# FortiDashboard Add-ons
 
-Public registry of add-on manifests consumed by [FortiDashboard](https://github.com/ping-wins) at runtime.
-
-Each subdirectory holds one provider integration described by an `addon.json`
-manifest. The dashboard API loads every manifest at boot and exposes them
-under `/api/marketplace/addons`. The marketplace tab inside the cockpit lists
-them and drives the connect form from `provider.auth.fields`.
+Marketplace add-on packages installed by FortiDashboard at runtime.
 
 ## Layout
 
-```
-fortidashboard-addons/
-  README.md
-  <addon-id>/
-    addon.json          # required manifest
-    icon.svg            # optional, rendered in marketplace card
-    docs/...            # optional, vendor docs / release notes
-```
+    <addon-id>/<version>/addon.json          # AddonManifest (pydantic-validated)
+    <addon-id>/<version>/connector/__init__.py  # must expose get_connector(config) -> connector
 
-## Manifest contract
+`connector` is the manifest `entrypoint` (default). The connector object must
+implement: `health_check() -> dict`, `get_widget_data(req) -> dict`,
+`ingest_events(since) -> list`, `close() -> None`. Optional duck-typed:
+`list_playbook_actions() -> list[dict]`, `run_playbook_action(action_id, params) -> dict`.
 
-Authoritative pydantic schema lives in the dashboard repo at
-`apps/api/app/addons/manifest.py`. Required fields:
+Packages are self-contained: stdlib + httpx only, no imports from the dashboard.
 
-- `id`, `version` — stable identifier and semver of the manifest itself.
-- `name`, `vendor`, `category`, `description` — listing metadata.
-- `provider.type` — gateway-side connector name (`fortigate`, `palo-alto`, ...).
-- `provider.auth.kind` + `provider.auth.fields` — schema for the connect form.
-- `routes` — every REST path the connector calls (used for docs and audit).
-- `widgets` — widget catalog ids the add-on contributes.
-- `siemEventTypes` — event type strings the connector emits.
+## Releasing
 
-Optional fields:
+Tag a version so the dashboard install flow can fetch it:
 
-- `compatibility.minProviderVersion` — minimum vendor firmware/version the
-  manifest was validated against. Routes that only exist on newer firmware
-  may also carry their own `minProviderVersion`.
-- `compatibility.testedVersions` — explicit list of vendor versions the
-  manifest has been verified on.
-- `compatibility.notes` — free text describing version-specific quirks
-  (path differences, envelope shape, required filter syntax, ...).
+    git tag <addon-id>-v<version> && git push origin <addon-id>-v<version>
 
-## Adding a new add-on
-
-1. Create `<addon-id>/addon.json`. Validate it locally against the dashboard
-   schema by running, from a FortiDashboard checkout:
-   ```bash
-   uv run python -c "from app.addons.registry import list_addons; print(list_addons())"
-   ```
-2. Open a pull request. CI in the dashboard repo will pull the registry on
-   release builds and fail if the manifest is invalid.
-3. After merge, cut a tag (`v<n>.<n>.<n>`). The dashboard pins the registry
-   to a tag, not `main`.
-
-## Current add-ons
-
-| ID              | Vendor    | Category | Min provider version |
-|-----------------|-----------|----------|----------------------|
-| fortigate-core  | Fortinet  | firewall | FortiOS 7.6.0        |
-
-## Versioning
-
-The registry itself is versioned with git tags. Each `addon.json` carries its
-own semver in `version`; bump it whenever the route set, auth schema, widget
-catalog or SIEM event types change in a way that affects consumers.
+The dashboard fetches `https://api.github.com/repos/ping-wins/fortidashboard-addons/tarball/<tag>`
+and expects the package at `<addon-id>/<version>/` inside the tarball.

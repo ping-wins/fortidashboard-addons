@@ -1,15 +1,59 @@
 {
   "addons": [
     {
-      "id": "fortiweb-waf",
-      "name": "FortiWeb WAF",
+      "id": "fortigate-core",
+      "name": "FortiGate Core",
+      "vendor": "Fortinet",
+      "category": "firewall",
+      "icon": "fortinet",
+      "description": "Pull system status, traffic, policies, threat logs and admin login events from FortiGate REST API.",
+      "latestVersion": "0.2.0",
+      "versions": ["0.2.0"],
+      "tagTemplate": "fortigate-core-v{version}"
+    },
+    {
+      "id": "fortiweb-core",
+      "name": "FortiWeb Core",
       "vendor": "Fortinet",
       "category": "waf",
       "icon": "fortinet",
-      "description": "Ingest FortiWeb WAF telemetry and turn web attacks into SIEM incidents.",
-      "latestVersion": "0.1.0",
-      "versions": ["0.1.0"],
-      "tagTemplate": "fortiweb-waf-v{version}"
+      "description": "Connect a FortiWeb WAF: REST health probe plus push-ingest of Attack/Traffic/Event telemetry.",
+      "latestVersion": "8.0.5",
+      "versions": ["8.0.5"],
+      "tagTemplate": "fortiweb-core-v{version}"
+    },
+    {
+      "id": "penguin-siem",
+      "name": "Kowalski SIEM",
+      "vendor": "PingWins",
+      "category": "siem",
+      "icon": "penguin",
+      "description": "Kowalski SIEM: events, incidents, detection rules and timelines.",
+      "latestVersion": "1.0.0",
+      "versions": ["1.0.0"],
+      "tagTemplate": "penguin-siem-v{version}"
+    },
+    {
+      "id": "penguin-xdr",
+      "name": "Rico XDR",
+      "vendor": "PingWins",
+      "category": "xdr",
+      "icon": "penguin",
+      "description": "Rico XDR: endpoint inventory, endpoint events and heartbeats.",
+      "latestVersion": "1.0.0",
+      "versions": ["1.0.0"],
+      "tagTemplate": "penguin-xdr-v{version}"
+    },
+    {
+      "id": "penguin-soar",
+      "name": "Skipper SOAR",
+      "vendor": "PingWins",
+      "category": "soar",
+      "icon": "penguin",
+      "description": "Skipper SOAR: playbooks, playbook runs, approvals and dry-run actions.",
+      "latestVersion": "1.0.0",
+      "versions": ["1.0.0"],
+      "tagTemplate": "penguin-soar-v{version}"
     }
   ]
 }
