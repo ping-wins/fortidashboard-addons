@@ -1,0 +1,46 @@
+{
+  "id": "penguin-soar",
+  "version": "1.0.0",
+  "name": "Skipper SOAR",
+  "vendor": "PingWins",
+  "category": "soar",
+  "icon": "penguin",
+  "description": "Skipper SOAR: playbooks, playbook runs, approvals and dry-run actions.",
+  "minDashboardVersion": "0.1.0",
+  "provider": {
+    "type": "soar_skipper",
+    "auth": {
+      "kind": "apiKey",
+      "fields": [
+        {
+          "id": "host",
+          "label": "Skipper URL",
+          "type": "url",
+          "required": true,
+          "placeholder": "http://soar-skipper:8000"
+        }
+      ]
+    }
+  },
+  "compatibility": {
+    "testedVersions": [
+      "1.0.0"
+    ],
+    "notes": "Skipper SOAR service health probe."
+  },
+  "capabilities": {
+    "logSource": false,
+    "playbookTarget": true,
+    "managed": false
+  },
+  "routes": [],
+  "widgets": [
+    "soar-active-playbook-runs",
+    "soar-playbook-run-history"
+  ],
+  "siemEventTypes": [],
+  "entrypoint": "connector",
+  "requirements": [
+    "httpx>=0.27,<1.0"
+  ]
+}

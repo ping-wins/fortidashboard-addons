@@ -1,0 +1,47 @@
+{
+  "id": "penguin-siem",
+  "version": "1.0.0",
+  "name": "Kowalski SIEM",
+  "vendor": "PingWins",
+  "category": "siem",
+  "icon": "penguin",
+  "description": "Kowalski SIEM: events, incidents, detection rules and timelines.",
+  "minDashboardVersion": "0.1.0",
+  "provider": {
+    "type": "siem_kowalski",
+    "auth": {
+      "kind": "apiKey",
+      "fields": [
+        {
+          "id": "host",
+          "label": "Kowalski URL",
+          "type": "url",
+          "required": true,
+          "placeholder": "http://siem-kowalski:8000"
+        }
+      ]
+    }
+  },
+  "compatibility": {
+    "testedVersions": [
+      "1.0.0"
+    ],
+    "notes": "Kowalski SIEM service health probe."
+  },
+  "capabilities": {
+    "logSource": true,
+    "playbookTarget": false,
+    "managed": false
+  },
+  "routes": [],
+  "widgets": [
+    "soc-incidents-by-severity",
+    "soc-recent-incidents",
+    "soc-top-entities"
+  ],
+  "siemEventTypes": [],
+  "entrypoint": "connector",
+  "requirements": [
+    "httpx>=0.27,<1.0"
+  ]
+}

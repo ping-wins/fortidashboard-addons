@@ -1,0 +1,45 @@
+{
+  "id": "penguin-xdr",
+  "version": "1.0.0",
+  "name": "Rico XDR",
+  "vendor": "PingWins",
+  "category": "xdr",
+  "icon": "penguin",
+  "description": "Rico XDR: endpoint inventory, endpoint events and heartbeats.",
+  "minDashboardVersion": "0.1.0",
+  "provider": {
+    "type": "xdr_rico",
+    "auth": {
+      "kind": "apiKey",
+      "fields": [
+        {
+          "id": "host",
+          "label": "Rico URL",
+          "type": "url",
+          "required": true,
+          "placeholder": "http://xdr-rico:8000"
+        }
+      ]
+    }
+  },
+  "compatibility": {
+    "testedVersions": [
+      "1.0.0"
+    ],
+    "notes": "Rico XDR service health probe."
+  },
+  "capabilities": {
+    "logSource": false,
+    "playbookTarget": false,
+    "managed": false
+  },
+  "routes": [],
+  "widgets": [
+    "xdr-endpoint-health"
+  ],
+  "siemEventTypes": [],
+  "entrypoint": "connector",
+  "requirements": [
+    "httpx>=0.27,<1.0"
+  ]
+}
