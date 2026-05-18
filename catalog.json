@@ -7,8 +7,8 @@
       "category": "firewall",
       "icon": "fortinet",
       "description": "Pull system status, traffic, policies, threat logs and admin login events from FortiGate REST API.",
-      "latestVersion": "0.2.0",
-      "versions": ["0.2.0"],
+      "latestVersion": "0.2.1",
+      "versions": ["0.2.1", "0.2.0"],
       "tagTemplate": "fortigate-core-v{version}"
     },
     {

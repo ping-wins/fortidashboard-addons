@@ -1,0 +1,44 @@
+{
+  "id": "fortigate-core",
+  "version": "0.2.1",
+  "name": "FortiGate Core",
+  "vendor": "Fortinet",
+  "category": "firewall",
+  "description": "Pull system status, traffic, policies, threat logs and admin login events from FortiGate REST API.",
+  "icon": "fortinet",
+  "minDashboardVersion": "0.1.0",
+  "provider": {
+    "type": "fortigate",
+    "auth": {
+      "kind": "apiKey",
+      "fields": [
+        { "id": "host", "label": "Host URL", "type": "url", "required": true, "placeholder": "https://192.168.0.100" },
+        { "id": "apiKey", "label": "API Key", "type": "secret", "required": true },
+        { "id": "verifyTls", "label": "Verify TLS", "type": "boolean", "default": false }
+      ]
+    }
+  },
+  "compatibility": {
+    "minProviderVersion": "7.6.0",
+    "testedVersions": ["7.6.0", "7.6.1"],
+    "notes": "Routes targeted at FortiOS 7.6+. 401/403 errors now include the FortiGate response body and a hint about the trusthost allowlist."
+  },
+  "capabilities": { "logSource": true, "playbookTarget": false, "managed": true },
+  "routes": [
+    { "id": "system-status", "method": "GET", "path": "/api/v2/monitor/system/status", "summary": "Device hostname, model, firmware, serial." }
+  ],
+  "widgets": [
+    "fortigate-system-status",
+    "fortigate-network-traffic",
+    "fortigate-firewall-policies",
+    "fortigate-top-threats",
+    "fortigate-recent-events",
+    "fortigate-risk-posture",
+    "fortigate-interface-health",
+    "fortigate-anomaly-highlights",
+    "fortigate-kpi-sessions"
+  ],
+  "siemEventTypes": ["auth.failed_login", "network.deny", "network.event"],
+  "entrypoint": "connector",
+  "requirements": ["httpx>=0.27,<1.0"]
+}
