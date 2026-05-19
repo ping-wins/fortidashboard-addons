@@ -1,6 +1,6 @@
-# FortiDashboard Add-ons
+# Penguard Add-ons
 
-Marketplace add-on packages installed by FortiDashboard at runtime.
+Marketplace add-on packages installed by Penguard at runtime.
 
 ## Layout
 
@@ -20,5 +20,5 @@ Tag a version so the dashboard install flow can fetch it:
 
     git tag <addon-id>-v<version> && git push origin <addon-id>-v<version>
 
-The dashboard fetches `https://api.github.com/repos/ping-wins/fortidashboard-addons/tarball/<tag>`
+The dashboard fetches `https://api.github.com/repos/ping-wins/penguard-addons/tarball/<tag>`
 and expects the package at `<addon-id>/<version>/` inside the tarball.
