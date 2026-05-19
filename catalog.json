@@ -23,6 +23,17 @@
       "tagTemplate": "fortiweb-core-v{version}"
     },
     {
+      "id": "fortianalyzer-core",
+      "name": "FortiAnalyzer Core Beta",
+      "vendor": "Fortinet",
+      "category": "siem",
+      "icon": "fortinet",
+      "description": "SIEM analytics beta for FortiAnalyzer: marketplace listing, JSON-RPC health probe scaffold, preview widgets, and draft-only analyst playbook actions. Appliance validation is pending.",
+      "latestVersion": "0.1.0-beta.1",
+      "versions": ["0.1.0-beta.1"],
+      "tagTemplate": "fortianalyzer-core-v{version}"
+    },
+    {
       "id": "penguin-siem",
       "name": "Kowalski SIEM",
       "vendor": "PingWins",

@@ -1,0 +1,66 @@
+{
+  "id": "fortianalyzer-core",
+  "version": "0.1.0-beta.1",
+  "name": "FortiAnalyzer Core Beta",
+  "vendor": "Fortinet",
+  "category": "siem",
+  "description": "SIEM analytics beta for FortiAnalyzer: marketplace listing, JSON-RPC health probe scaffold, preview widgets, and draft-only analyst playbook actions. Appliance validation is pending.",
+  "icon": "fortinet",
+  "minDashboardVersion": "0.1.0",
+  "provider": {
+    "type": "fortianalyzer",
+    "auth": {
+      "kind": "apiKey",
+      "fields": [
+        {
+          "id": "host",
+          "label": "FortiAnalyzer URL",
+          "type": "url",
+          "required": true,
+          "placeholder": "https://fortianalyzer.example.local"
+        },
+        {
+          "id": "apiKey",
+          "label": "API Key",
+          "type": "secret",
+          "required": true
+        },
+        {
+          "id": "verifyTls",
+          "label": "Verify TLS",
+          "type": "boolean",
+          "default": false
+        }
+      ]
+    }
+  },
+  "compatibility": {
+    "minProviderVersion": "7.6.0",
+    "testedVersions": [],
+    "notes": "Beta/unvalidated marketplace preview. The team does not currently have a FortiAnalyzer appliance for validation. Requires a FortiAnalyzer REST API Admin with JSON API read access and trusted hosts that allow the FortiDashboard API source IP. Health check uses POST /jsonrpc with url /sys/status. Widgets and playbook actions are preview/draft-only and are not appliance-validated."
+  },
+  "capabilities": {
+    "logSource": true,
+    "playbookTarget": true,
+    "managed": true
+  },
+  "routes": [
+    {
+      "id": "jsonrpc-system-status",
+      "method": "POST",
+      "path": "/jsonrpc",
+      "summary": "Read-only JSON-RPC get request with url /sys/status."
+    }
+  ],
+  "widgets": [
+    "fortianalyzer-health-preview",
+    "fortianalyzer-adom-log-posture",
+    "fortianalyzer-top-event-types",
+    "fortianalyzer-ingestion-readiness"
+  ],
+  "siemEventTypes": [],
+  "entrypoint": "connector",
+  "requirements": [
+    "httpx>=0.27,<1.0"
+  ]
+}
